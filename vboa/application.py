@@ -7,7 +7,8 @@ ESC_KEY_CODE = 27
 
 def run_app() -> None:
     raw_data_img = ImageLoader.load(
-        '/home/andrwnv/workflow/vision-based-obstacle-avoidance-system/vboa/datasets/tree-500x500.jpeg')
+        '/home/andrwnv/workflow/vision-based-obstacle-avoidance-system/vboa/datasets/images/tree-500x500.jpeg')
+    
     cv.imshow(winname='Image', mat=raw_data_img)
 
     key_code = cv.waitKey(0)
