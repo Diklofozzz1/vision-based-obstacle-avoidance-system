@@ -1,5 +1,7 @@
-from os import path
+from os import path, walk
 import re
+
+from typing import Dict
 
 import cv2 as cv
 import numpy as np
@@ -18,3 +20,19 @@ class ImageLoader:
             raise RuntimeError(f'{file_path} doesn\'t exists!')
 
         return cv.imread(file_path, 0)
+
+
+class ImagesLoader:
+    @staticmethod
+    def load(dir_path: str) -> Dict[str, np.ndarray]:
+        images = {}
+
+        for root, _, f in walk(dir_path):
+            for file in f:
+                try:
+                    filepath = path.join(root, file)
+                    images[filepath] = ImageLoader.load(filepath)
+                except:
+                    continue
+
+        return images
